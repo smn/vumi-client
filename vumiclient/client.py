@@ -77,7 +77,8 @@ def process_types(dictionary):
             value = dictionary.get(key)
             if value:
                 dictionary[key] = func(value)
-    return dictionary
+    # convert all dictionary keys to strings, older python versions complain
+    return dict((str(key), value) for key,value in dictionary.items())
 
 def is_successful(response):
     return 200 <= response.status_code < 300
